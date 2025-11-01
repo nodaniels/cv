@@ -85,20 +85,17 @@ a:hover {
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 20px;
-    animation: fadeIn 1s ease-in;
 }
 
 .tagline {
     font-size: 18px;
     color: var(--gray-color);
-    animation: fadeIn 1.5s ease-in;
     margin-bottom: 15px;
 }
 
 .tagline-secondary {
     font-size: 16px;
     color: var(--gray-color);
-    animation: fadeIn 2s ease-in;
     font-style: italic;
 }
 
@@ -299,10 +296,6 @@ footer {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.fade-in {
-    animation: fadeIn 0.8s ease-in;
 }
 
 /* Responsive */
