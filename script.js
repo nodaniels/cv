@@ -69,25 +69,27 @@ const contactInfo = document.getElementById('contact-info-trigger');
 const proximityHint = document.getElementById('proximity-hint');
 const profileImageStatic = document.getElementById('profile-image-static');
 const profileVideoInline = document.getElementById('profile-video-inline');
+const educationVideoInline = document.getElementById('education-video-inline');
 const homeView = document.getElementById('home-view');
+const educationNavBtn = document.querySelector('[data-view="uddannelse-view"]');
 let hintShown = false;
 let easterEggDiscovered = localStorage.getItem('easterEggDiscovered') === 'true';
 
-// Create confetti effect
-function createConfetti() {
-    const colors = ['#000000', '#555555', '#888888'];
-    const confettiCount = 50;
+// Create confetti effect with pastel colors
+function createConfetti(element) {
+    const colors = ['#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#E0BBE4', '#FEC8D8'];
+    const confettiCount = 30;
     
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        confetti.style.animationDelay = Math.random() * 0.3 + 's';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        contactInfo.appendChild(confetti);
+        element.appendChild(confetti);
         
         // Remove confetti after animation
-        setTimeout(() => confetti.remove(), 3000);
+        setTimeout(() => confetti.remove(), 2000);
     }
 }
 
@@ -135,10 +137,17 @@ if (contactInfo) {
         
         // Create confetti effect
         if (!easterEggDiscovered) {
-            createConfetti();
+            createConfetti(contactInfo);
         }
         
-        // Replace static image with inline video
+        // Hide any other videos first
+        if (educationVideoInline) {
+            educationVideoInline.style.opacity = '0';
+            educationVideoInline.pause();
+            educationVideoInline.currentTime = 0;
+        }
+        
+        // Replace static image with happy video
         if (profileImageStatic && profileVideoInline) {
             profileImageStatic.style.opacity = '0';
             profileVideoInline.style.opacity = '1';
@@ -175,6 +184,41 @@ if (contactInfo) {
             }
         });
     }
+}
+
+// Education video easter egg - hover over "Uddannelse" nav button (only on home view)
+if (educationNavBtn && educationVideoInline && profileImageStatic) {
+    educationNavBtn.addEventListener('mouseenter', () => {
+        const isHomeView = homeView && !homeView.classList.contains('hidden');
+        
+        // Only trigger on home view
+        if (!isHomeView) return;
+        
+        // Hide any other videos first
+        if (profileVideoInline) {
+            profileVideoInline.style.opacity = '0';
+            profileVideoInline.pause();
+            profileVideoInline.currentTime = 0;
+        }
+        
+        // Replace static image with education video
+        profileImageStatic.style.opacity = '0';
+        educationVideoInline.style.opacity = '1';
+        educationVideoInline.play();
+    });
+    
+    educationNavBtn.addEventListener('mouseleave', () => {
+        const isHomeView = homeView && !homeView.classList.contains('hidden');
+        
+        // Only trigger on home view
+        if (!isHomeView) return;
+        
+        // Restore static image
+        profileImageStatic.style.opacity = '1';
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.pause();
+        educationVideoInline.currentTime = 0;
+    });
 }
 
 // Console Easter egg
