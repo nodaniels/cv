@@ -69,6 +69,26 @@ a {
     align-items: flex-end;
 }
 
+.language-toggle {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+    background: none;
+    border: 1px solid var(--border-color);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px 12px;
+    transition: background-color 0.2s ease;
+}
+
+.language-toggle:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
 .contact-info span {
     white-space: nowrap;
 }
@@ -230,6 +250,13 @@ a {
         gap: 3px;
         align-items: flex-start;
         font-size: 11px;
+    }
+
+    .language-toggle {
+        bottom: 15px;
+        right: 15px;
+        font-size: 12px;
+        padding: 4px 10px;
     }
 
     .contact-info span {
