@@ -5,24 +5,65 @@ let currentLanguage = 'da'; // default Danish
 const navButtons = document.querySelectorAll('.nav-btn');
 const views = document.querySelectorAll('.passion-statement, .content-view');
 
+function showView(targetView) {
+    // Remove active class from all buttons
+    navButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Add active class to the button that matches targetView
+    const activeButton = document.querySelector(`[data-view="${targetView}"]`);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+    
+    // Hide all views
+    views.forEach(view => view.classList.add('hidden'));
+    
+    // Show target view
+    const target = document.getElementById(targetView);
+    if (target) {
+        target.classList.remove('hidden');
+    }
+    
+    // If navigating to home view, reset all videos and show only the image
+    if (targetView === 'home-view') {
+        const profileImageStatic = document.getElementById('profile-image-static');
+        const profileVideoInline = document.getElementById('profile-video-inline');
+        const educationVideoInline = document.getElementById('education-video-inline');
+        const workerVideoInline = document.getElementById('worker-video-inline');
+        const projectsVideoInline = document.getElementById('projects-video-inline');
+        
+        if (profileImageStatic) {
+            profileImageStatic.style.opacity = '1';
+        }
+        
+        // Hide and reset all videos
+        if (profileVideoInline) {
+            profileVideoInline.style.opacity = '0';
+            profileVideoInline.pause();
+            profileVideoInline.currentTime = 0;
+        }
+        if (educationVideoInline) {
+            educationVideoInline.style.opacity = '0';
+            educationVideoInline.pause();
+            educationVideoInline.currentTime = 0;
+        }
+        if (workerVideoInline) {
+            workerVideoInline.style.opacity = '0';
+            workerVideoInline.pause();
+            workerVideoInline.currentTime = 0;
+        }
+        if (projectsVideoInline) {
+            projectsVideoInline.style.opacity = '0';
+            projectsVideoInline.pause();
+            projectsVideoInline.currentTime = 0;
+        }
+    }
+}
+
 navButtons.forEach(button => {
     button.addEventListener('click', () => {
         const targetView = button.getAttribute('data-view');
-        
-        // Remove active class from all buttons
-        navButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
-        button.classList.add('active');
-        
-        // Hide all views
-        views.forEach(view => view.classList.add('hidden'));
-        
-        // Show target view
-        const target = document.getElementById(targetView);
-        if (target) {
-            target.classList.remove('hidden');
-        }
+        showView(targetView);
     });
 });
 
