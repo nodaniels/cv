@@ -70,8 +70,12 @@ const proximityHint = document.getElementById('proximity-hint');
 const profileImageStatic = document.getElementById('profile-image-static');
 const profileVideoInline = document.getElementById('profile-video-inline');
 const educationVideoInline = document.getElementById('education-video-inline');
+const workerVideoInline = document.getElementById('worker-video-inline');
+const projectsVideoInline = document.getElementById('projects-video-inline');
 const homeView = document.getElementById('home-view');
 const educationNavBtn = document.querySelector('[data-view="uddannelse-view"]');
+const erfaringNavBtn = document.querySelector('[data-view="erfaring-view"]');
+const projectsNavBtn = document.querySelector('[data-view="projekter-view"]');
 let hintShown = false;
 let easterEggDiscovered = localStorage.getItem('easterEggDiscovered') === 'true';
 
@@ -146,6 +150,16 @@ if (contactInfo) {
             educationVideoInline.pause();
             educationVideoInline.currentTime = 0;
         }
+        if (workerVideoInline) {
+            workerVideoInline.style.opacity = '0';
+            workerVideoInline.pause();
+            workerVideoInline.currentTime = 0;
+        }
+        if (projectsVideoInline) {
+            projectsVideoInline.style.opacity = '0';
+            projectsVideoInline.pause();
+            projectsVideoInline.currentTime = 0;
+        }
         
         // Replace static image with happy video
         if (profileImageStatic && profileVideoInline) {
@@ -186,40 +200,98 @@ if (contactInfo) {
     }
 }
 
-// Education video easter egg - hover over "Uddannelse" nav button (only on home view)
-if (educationNavBtn && educationVideoInline && profileImageStatic) {
-    educationNavBtn.addEventListener('mouseenter', () => {
-        const isHomeView = homeView && !homeView.classList.contains('hidden');
+// Education button hover - show education video overlay (no confetti)
+educationNavBtn.addEventListener('mouseenter', () => {
+    // Only trigger on home view
+    if (!homeView.classList.contains('hidden')) {
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.pause();
+        workerVideoInline.currentTime = 0;
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.pause();
+        projectsVideoInline.currentTime = 0;
         
-        // Only trigger on home view
-        if (!isHomeView) return;
-        
-        // Hide any other videos first
-        if (profileVideoInline) {
-            profileVideoInline.style.opacity = '0';
-            profileVideoInline.pause();
-            profileVideoInline.currentTime = 0;
-        }
-        
-        // Replace static image with education video
+        // Show education video
         profileImageStatic.style.opacity = '0';
         educationVideoInline.style.opacity = '1';
         educationVideoInline.play();
-    });
-    
-    educationNavBtn.addEventListener('mouseleave', () => {
-        const isHomeView = homeView && !homeView.classList.contains('hidden');
-        
-        // Only trigger on home view
-        if (!isHomeView) return;
-        
-        // Restore static image
+    }
+});
+
+educationNavBtn.addEventListener('mouseleave', () => {
+    if (!homeView.classList.contains('hidden')) {
         profileImageStatic.style.opacity = '1';
         educationVideoInline.style.opacity = '0';
         educationVideoInline.pause();
         educationVideoInline.currentTime = 0;
-    });
-}
+    }
+});
+
+// Worker button hover - show worker video overlay (no confetti)
+erfaringNavBtn.addEventListener('mouseenter', () => {
+    // Only trigger on home view
+    if (!homeView.classList.contains('hidden')) {
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.pause();
+        educationVideoInline.currentTime = 0;
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.pause();
+        projectsVideoInline.currentTime = 0;
+        
+        // Show worker video
+        profileImageStatic.style.opacity = '0';
+        workerVideoInline.style.opacity = '1';
+        workerVideoInline.play();
+    }
+});
+
+erfaringNavBtn.addEventListener('mouseleave', () => {
+    if (!homeView.classList.contains('hidden')) {
+        profileImageStatic.style.opacity = '1';
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.pause();
+        workerVideoInline.currentTime = 0;
+    }
+});
+
+// Projects button hover - show projects video overlay (no confetti)
+projectsNavBtn.addEventListener('mouseenter', () => {
+    // Only trigger on home view
+    if (!homeView.classList.contains('hidden')) {
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.pause();
+        educationVideoInline.currentTime = 0;
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.pause();
+        workerVideoInline.currentTime = 0;
+        
+        // Show projects video
+        profileImageStatic.style.opacity = '0';
+        projectsVideoInline.style.opacity = '1';
+        projectsVideoInline.play();
+    }
+});
+
+projectsNavBtn.addEventListener('mouseleave', () => {
+    if (!homeView.classList.contains('hidden')) {
+        profileImageStatic.style.opacity = '1';
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.pause();
+        projectsVideoInline.currentTime = 0;
+    }
+});
 
 // Console Easter egg
 console.log(`
