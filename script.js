@@ -231,16 +231,21 @@ educationNavBtn.addEventListener('mouseleave', () => {
     }
 });
 
-// On mobile: redirect to education view when video ends
-educationVideoInline.addEventListener('ended', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
-        // Hide video and restore image
-        profileImageStatic.style.opacity = '1';
-        educationVideoInline.style.opacity = '0';
-        educationVideoInline.currentTime = 0;
-        
-        // Navigate to education view
-        showView('uddannelse-view');
+// On mobile: redirect to education view after 6 seconds
+let educationVideoTimeout = null;
+educationVideoInline.addEventListener('timeupdate', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && educationVideoInline.currentTime >= 6 && !educationVideoTimeout) {
+        educationVideoTimeout = setTimeout(() => {
+            // Hide video and restore image
+            profileImageStatic.style.opacity = '1';
+            educationVideoInline.style.opacity = '0';
+            educationVideoInline.pause();
+            educationVideoInline.currentTime = 0;
+            educationVideoTimeout = null;
+            
+            // Navigate to education view
+            showView('uddannelse-view');
+        }, 0);
     }
 });
 
@@ -300,16 +305,21 @@ erfaringNavBtn.addEventListener('mouseleave', () => {
     }
 });
 
-// On mobile: redirect to erfaring view when video ends
-workerVideoInline.addEventListener('ended', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
-        // Hide video and restore image
-        profileImageStatic.style.opacity = '1';
-        workerVideoInline.style.opacity = '0';
-        workerVideoInline.currentTime = 0;
-        
-        // Navigate to erfaring view
-        showView('erfaring-view');
+// On mobile: redirect to erfaring view after 6 seconds
+let workerVideoTimeout = null;
+workerVideoInline.addEventListener('timeupdate', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && workerVideoInline.currentTime >= 6 && !workerVideoTimeout) {
+        workerVideoTimeout = setTimeout(() => {
+            // Hide video and restore image
+            profileImageStatic.style.opacity = '1';
+            workerVideoInline.style.opacity = '0';
+            workerVideoInline.pause();
+            workerVideoInline.currentTime = 0;
+            workerVideoTimeout = null;
+            
+            // Navigate to erfaring view
+            showView('erfaring-view');
+        }, 0);
     }
 });
 
@@ -369,16 +379,21 @@ projectsNavBtn.addEventListener('mouseleave', () => {
     }
 });
 
-// On mobile: redirect to projekter view when video ends
-projectsVideoInline.addEventListener('ended', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
-        // Hide video and restore image
-        profileImageStatic.style.opacity = '1';
-        projectsVideoInline.style.opacity = '0';
-        projectsVideoInline.currentTime = 0;
-        
-        // Navigate to projekter view
-        showView('projekter-view');
+// On mobile: redirect to projekter view after 6 seconds
+let projectsVideoTimeout = null;
+projectsVideoInline.addEventListener('timeupdate', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && projectsVideoInline.currentTime >= 6 && !projectsVideoTimeout) {
+        projectsVideoTimeout = setTimeout(() => {
+            // Hide video and restore image
+            profileImageStatic.style.opacity = '1';
+            projectsVideoInline.style.opacity = '0';
+            projectsVideoInline.pause();
+            projectsVideoInline.currentTime = 0;
+            projectsVideoTimeout = null;
+            
+            // Navigate to projekter view
+            showView('projekter-view');
+        }, 0);
     }
 });
 
