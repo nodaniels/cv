@@ -231,6 +231,44 @@ educationNavBtn.addEventListener('mouseleave', () => {
     }
 });
 
+// On mobile: redirect to education view when video ends
+educationVideoInline.addEventListener('ended', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        // Hide video and restore image
+        profileImageStatic.style.opacity = '1';
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.currentTime = 0;
+        
+        // Navigate to education view
+        showView('uddannelse-view');
+    }
+});
+
+// Education button click on mobile - play video instead of immediate navigation
+educationNavBtn.addEventListener('click', (e) => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.pause();
+        workerVideoInline.currentTime = 0;
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.pause();
+        projectsVideoInline.currentTime = 0;
+        
+        // Show and play education video
+        profileImageStatic.style.opacity = '0';
+        educationVideoInline.style.opacity = '1';
+        educationVideoInline.currentTime = 0;
+        educationVideoInline.play();
+    }
+});
+
 // Worker button hover - show worker video overlay (no confetti)
 erfaringNavBtn.addEventListener('mouseenter', () => {
     // Only trigger on home view
@@ -262,6 +300,44 @@ erfaringNavBtn.addEventListener('mouseleave', () => {
     }
 });
 
+// On mobile: redirect to erfaring view when video ends
+workerVideoInline.addEventListener('ended', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        // Hide video and restore image
+        profileImageStatic.style.opacity = '1';
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.currentTime = 0;
+        
+        // Navigate to erfaring view
+        showView('erfaring-view');
+    }
+});
+
+// Worker button click on mobile - play video instead of immediate navigation
+erfaringNavBtn.addEventListener('click', (e) => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.pause();
+        educationVideoInline.currentTime = 0;
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.pause();
+        projectsVideoInline.currentTime = 0;
+        
+        // Show and play worker video
+        profileImageStatic.style.opacity = '0';
+        workerVideoInline.style.opacity = '1';
+        workerVideoInline.currentTime = 0;
+        workerVideoInline.play();
+    }
+});
+
 // Projects button hover - show projects video overlay (no confetti)
 projectsNavBtn.addEventListener('mouseenter', () => {
     // Only trigger on home view
@@ -290,6 +366,44 @@ projectsNavBtn.addEventListener('mouseleave', () => {
         projectsVideoInline.style.opacity = '0';
         projectsVideoInline.pause();
         projectsVideoInline.currentTime = 0;
+    }
+});
+
+// On mobile: redirect to projekter view when video ends
+projectsVideoInline.addEventListener('ended', () => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        // Hide video and restore image
+        profileImageStatic.style.opacity = '1';
+        projectsVideoInline.style.opacity = '0';
+        projectsVideoInline.currentTime = 0;
+        
+        // Navigate to projekter view
+        showView('projekter-view');
+    }
+});
+
+// Projects button click on mobile - play video instead of immediate navigation
+projectsNavBtn.addEventListener('click', (e) => {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Hide other videos first
+        profileVideoInline.style.opacity = '0';
+        profileVideoInline.pause();
+        profileVideoInline.currentTime = 0;
+        educationVideoInline.style.opacity = '0';
+        educationVideoInline.pause();
+        educationVideoInline.currentTime = 0;
+        workerVideoInline.style.opacity = '0';
+        workerVideoInline.pause();
+        workerVideoInline.currentTime = 0;
+        
+        // Show and play projects video
+        profileImageStatic.style.opacity = '0';
+        projectsVideoInline.style.opacity = '1';
+        projectsVideoInline.currentTime = 0;
+        projectsVideoInline.play();
     }
 });
 
