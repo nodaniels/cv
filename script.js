@@ -1,13 +1,24 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+// View switching functionality
+const navButtons = document.querySelectorAll('.nav-btn');
+const views = document.querySelectorAll('.passion-statement, .content-view');
+
+navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const targetView = button.getAttribute('data-view');
+        
+        // Remove active class from all buttons
+        navButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Hide all views
+        views.forEach(view => view.classList.add('hidden'));
+        
+        // Show target view
+        const target = document.getElementById(targetView);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.classList.remove('hidden');
         }
     });
 });
