@@ -359,6 +359,14 @@ a {
 
     body.hide-header .content-view {
         padding-top: 20px;
+        margin-top: 120px;
+        max-height: calc(100vh - 240px);
+        overflow-y: auto;
+    }
+
+    .content-container {
+        max-height: none;
+        padding-bottom: 60px;
     }
 
     .header-bar {
@@ -522,8 +530,15 @@ a {
         gap: 15px;
         align-items: flex-start;
         margin-bottom: 20px;
+        padding: 15px 20px;
         padding-bottom: 15px;
         border-bottom: 1px solid var(--border-color);
+        background-color: var(--bg-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
     }
 
     .mobile-profile-container {
@@ -538,6 +553,7 @@ a {
         height: 100%;
         object-fit: cover;
         display: block;
+        filter: grayscale(100%);
     }
 
     .mobile-profile-video {
