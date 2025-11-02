@@ -24,6 +24,15 @@ function showView(targetView) {
         target.classList.remove('hidden');
     }
     
+    // On mobile: hide header bar on content views, show on home view
+    if (window.innerWidth <= 768) {
+        if (targetView === 'home-view') {
+            document.body.classList.remove('hide-header');
+        } else {
+            document.body.classList.add('hide-header');
+        }
+    }
+    
     // If navigating to home view, reset all videos and show only the image
     if (targetView === 'home-view') {
         const profileImageStatic = document.getElementById('profile-image-static');
@@ -56,6 +65,47 @@ function showView(targetView) {
             projectsVideoInline.style.opacity = '0';
             projectsVideoInline.pause();
             projectsVideoInline.currentTime = 0;
+        }
+    }
+    
+    // On mobile: play video on content views once
+    if (window.innerWidth <= 768) {
+        if (targetView === 'uddannelse-view') {
+            const mobileVideo = document.getElementById('mobile-profile-video-uddannelse');
+            const mobileImage = document.getElementById('mobile-profile-image-uddannelse');
+            if (mobileVideo && mobileImage) {
+                mobileVideo.currentTime = 0;
+                mobileVideo.style.opacity = '1';
+                mobileVideo.play().catch(err => console.log('Video play failed:', err));
+                mobileVideo.onended = () => {
+                    mobileVideo.style.opacity = '0';
+                    mobileVideo.currentTime = 0;
+                };
+            }
+        } else if (targetView === 'erfaring-view') {
+            const mobileVideo = document.getElementById('mobile-profile-video-erfaring');
+            const mobileImage = document.getElementById('mobile-profile-image-erfaring');
+            if (mobileVideo && mobileImage) {
+                mobileVideo.currentTime = 0;
+                mobileVideo.style.opacity = '1';
+                mobileVideo.play().catch(err => console.log('Video play failed:', err));
+                mobileVideo.onended = () => {
+                    mobileVideo.style.opacity = '0';
+                    mobileVideo.currentTime = 0;
+                };
+            }
+        } else if (targetView === 'projekter-view') {
+            const mobileVideo = document.getElementById('mobile-profile-video-projekter');
+            const mobileImage = document.getElementById('mobile-profile-image-projekter');
+            if (mobileVideo && mobileImage) {
+                mobileVideo.currentTime = 0;
+                mobileVideo.style.opacity = '1';
+                mobileVideo.play().catch(err => console.log('Video play failed:', err));
+                mobileVideo.onended = () => {
+                    mobileVideo.style.opacity = '0';
+                    mobileVideo.currentTime = 0;
+                };
+            }
         }
     }
 }
