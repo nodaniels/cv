@@ -275,7 +275,7 @@ educationNavBtn.addEventListener('mouseleave', () => {
 // On mobile: redirect to education view after 6 seconds
 let educationVideoTimeout = null;
 educationVideoInline.addEventListener('timeupdate', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && educationVideoInline.currentTime >= 6 && !educationVideoTimeout) {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && educationVideoInline.style.opacity === '1' && educationVideoInline.currentTime >= 6 && !educationVideoTimeout) {
         educationVideoTimeout = setTimeout(() => {
             // Hide video and restore image
             profileImageStatic.style.opacity = '1';
@@ -296,6 +296,12 @@ educationNavBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
+        // Reset timeout if exists
+        if (educationVideoTimeout) {
+            clearTimeout(educationVideoTimeout);
+            educationVideoTimeout = null;
+        }
+        
         // Hide other videos first
         profileVideoInline.style.opacity = '0';
         profileVideoInline.pause();
@@ -311,7 +317,11 @@ educationNavBtn.addEventListener('click', (e) => {
         profileImageStatic.style.opacity = '0';
         educationVideoInline.style.opacity = '1';
         educationVideoInline.currentTime = 0;
-        educationVideoInline.play();
+        educationVideoInline.play().catch(err => {
+            console.log('Video play failed:', err);
+        });
+        
+        return false;
     }
 });
 
@@ -349,7 +359,7 @@ erfaringNavBtn.addEventListener('mouseleave', () => {
 // On mobile: redirect to erfaring view after 6 seconds
 let workerVideoTimeout = null;
 workerVideoInline.addEventListener('timeupdate', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && workerVideoInline.currentTime >= 6 && !workerVideoTimeout) {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && workerVideoInline.style.opacity === '1' && workerVideoInline.currentTime >= 6 && !workerVideoTimeout) {
         workerVideoTimeout = setTimeout(() => {
             // Hide video and restore image
             profileImageStatic.style.opacity = '1';
@@ -370,6 +380,12 @@ erfaringNavBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
+        // Reset timeout if exists
+        if (workerVideoTimeout) {
+            clearTimeout(workerVideoTimeout);
+            workerVideoTimeout = null;
+        }
+        
         // Hide other videos first
         profileVideoInline.style.opacity = '0';
         profileVideoInline.pause();
@@ -385,7 +401,11 @@ erfaringNavBtn.addEventListener('click', (e) => {
         profileImageStatic.style.opacity = '0';
         workerVideoInline.style.opacity = '1';
         workerVideoInline.currentTime = 0;
-        workerVideoInline.play();
+        workerVideoInline.play().catch(err => {
+            console.log('Video play failed:', err);
+        });
+        
+        return false;
     }
 });
 
@@ -423,7 +443,7 @@ projectsNavBtn.addEventListener('mouseleave', () => {
 // On mobile: redirect to projekter view after 6 seconds
 let projectsVideoTimeout = null;
 projectsVideoInline.addEventListener('timeupdate', () => {
-    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && projectsVideoInline.currentTime >= 6 && !projectsVideoTimeout) {
+    if (!homeView.classList.contains('hidden') && window.innerWidth <= 768 && projectsVideoInline.style.opacity === '1' && projectsVideoInline.currentTime >= 6 && !projectsVideoTimeout) {
         projectsVideoTimeout = setTimeout(() => {
             // Hide video and restore image
             profileImageStatic.style.opacity = '1';
@@ -444,6 +464,12 @@ projectsNavBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
+        // Reset timeout if exists
+        if (projectsVideoTimeout) {
+            clearTimeout(projectsVideoTimeout);
+            projectsVideoTimeout = null;
+        }
+        
         // Hide other videos first
         profileVideoInline.style.opacity = '0';
         profileVideoInline.pause();
@@ -459,7 +485,11 @@ projectsNavBtn.addEventListener('click', (e) => {
         profileImageStatic.style.opacity = '0';
         projectsVideoInline.style.opacity = '1';
         projectsVideoInline.currentTime = 0;
-        projectsVideoInline.play();
+        projectsVideoInline.play().catch(err => {
+            console.log('Video play failed:', err);
+        });
+        
+        return false;
     }
 });
 
